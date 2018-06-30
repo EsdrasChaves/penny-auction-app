@@ -25,7 +25,6 @@ public class AuctionProduct {
     private boolean hasFinished;
     private int expirationTime;
     private Timer timer;
-
     
     private static final int DEFAULT_TIMER = 40;
     
@@ -172,7 +171,6 @@ public class AuctionProduct {
     }
     
     class CounterTimer extends TimerTask {
-
         @Override
         public void run() {
             int currentTime = getExpirationTime();
@@ -182,7 +180,8 @@ public class AuctionProduct {
             if(currentTime == 0)
                 finishAuction();
         }
-        
     }
+    
+    
     
 }
