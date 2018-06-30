@@ -43,6 +43,7 @@ public class AuctionProduct {
         this.productImage = productImage;
         this.hasStarted = hasStarted;
         this.hasFinished = hasFinished;
+        
     }
 
     public int getId() {
@@ -147,9 +148,10 @@ public class AuctionProduct {
         startTimer();
     }
     
-    private void finishAuction() {
+    public void finishAuction() {
         setHasFinished(true);
-        timer.cancel();
+        if(timer != null)
+            timer.cancel();
     }
     
     public void placeBid(String userName) {
