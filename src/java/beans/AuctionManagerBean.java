@@ -67,7 +67,7 @@ public class AuctionManagerBean {
         return null;
     }
     
-    private void loadProducts() {
+    public void loadProducts() {
         this.products.clear();
         
         // TODO: Adicionar busca no banco
