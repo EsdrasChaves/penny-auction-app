@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>Cadastro</title>
+        <link rel="stylesheet" type="text/css" href="/resources/css/styles.css" />
+</h:head>
+<h:body>
+    
+    <div id="container">
+            <f:view>
+                <h:form prependId="false">
+                    <p:panelGrid columns="2" styleClass="ui-fluid center ui-noborder">
+
+                        <h:outputLabel for="name" value="Nome: " />
+                        <p:inputText id="name" value="#{registerBean.name}"
+                            required="true" requiredMessage="Por favor, insira seu nome" />
+
+                        <h:outputLabel for="email" value="Email: " />
+                        <p:inputText id="email" value="#{registerBean.email}"
+                            required="true" requiredMessage="Por favor, insira seu email" />
+                        
+                        <h:outputLabel for="psw" value="Senha: " />
+                        <p:password id="psw" value="#{registerBean.password}"
+                            required="true" requiredMessage="Por favor, insira sua senha" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Cadastrar" action="#{registerBean.register}" />
+                        </f:facet>
+                    </p:panelGrid>
+                  </h:form>
+            </f:view>
+        </div>
+</h:body>
+</html>

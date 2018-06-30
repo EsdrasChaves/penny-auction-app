@@ -15,16 +15,17 @@ import java.util.List;
  * @author aline
  */
 public class UserDAO {
-    public void saveUser(User u) throws ClassNotFoundException{
+    public static void saveUser(User u) throws ClassNotFoundException{
       Class.forName("org.apache.derby.jdbc.ClientDriver");
         try{
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/leilao; create=true;user=root;password=root");
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO USER(NAME, EMAIL, CREDITS, CASH) "
-                    + "VALUES (?, ?, ?, ?)");
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO USER_LEILAO(NAME, EMAIL, CREDITS, CASH, PASSWORD) "
+                    + "VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, u.getName());
             ps.setString(2, u.getEmail());
             ps.setInt(3, u.getCredits());
             ps.setDouble(4, u.getCash());
+            ps.setString(5, u.getPassword());
             ps.execute();
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -35,7 +36,7 @@ public class UserDAO {
       Class.forName("org.apache.derby.jdbc.ClientDriver");
         try{
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/leilao; create=true;user=root;password=root");
-              PreparedStatement ps = conn.prepareStatement("UPDATE USER SET NAME = \'" + u.getName() + "\', "
+              PreparedStatement ps = conn.prepareStatement("UPDATE USER_LEILAO SET NAME = \'" + u.getName() + "\', "
                       + "CREDITS = " + u.getCredits() + ", CASH = " + u.getCash() + " WHERE EMAIL = \'" + u.getEmail() + "\'");
               ps.execute();
         }catch(SQLException ex){
@@ -50,7 +51,7 @@ public class UserDAO {
         try{
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/leilao; create=true;user=root;password=root");
             Statement s = conn.createStatement();
-            s.execute("SELECT * FROM USER");
+            s.execute("SELECT * FROM USER_LEILAO");
             ResultSet rs = s.getResultSet();
             
             while(rs.next()){
@@ -89,7 +90,7 @@ public class UserDAO {
         try{
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/leilao; create=true;user=root;password=root");
             Statement s = conn.createStatement();
-            s.execute("SELECT * FROM USER WHERE ID = \'" + email + "\'");
+            s.execute("SELECT * FROM USER_LEILAO WHERE EMAIL = \'" + email + "\'");
             ResultSet rs = s.getResultSet();
             
             while(rs.next()){
@@ -111,6 +112,10 @@ public class UserDAO {
                     u.setCash(Double.parseDouble(rs.getString("CASH")));
                 }
                 
+                if(!(rs.getString("PASSWORD").equals(""))){
+                    u.setPassword(rs.getString("PASSWORD"));
+                }
+                
                 list.add(u);
             }
             return list.get(0);
@@ -124,7 +129,7 @@ public class UserDAO {
       Class.forName("org.apache.derby.jdbc.ClientDriver");
         try{
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/leilao; create=true;user=root;password=root");
-              PreparedStatement ps = conn.prepareStatement("DELETE FROM USER WHERE ID = \'" + email + "\'");
+              PreparedStatement ps = conn.prepareStatement("DELETE FROM USER_LEILAO WHERE ID = \'" + email + "\'");
               ps.execute();
         }catch(SQLException ex){
             ex.printStackTrace();

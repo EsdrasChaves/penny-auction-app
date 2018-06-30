@@ -5,9 +5,12 @@
  */
 package beans;
 
+import dao.UserDAO;
 import db.dto.UserAuthenticationDto;
+import entity.User;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -30,15 +33,15 @@ public class AuthenticationBean implements Serializable {
     @ManagedProperty(value="#{userBean}")
     private UserBean userInfoBean;
     
-    public String login () {
+    public String login () throws ClassNotFoundException, ParseException {
         
         
         UserAuthenticationDto userDto;
         userDto = new UserAuthenticationDto(email, password);
         
-        
-        // TODO: Alterar lógica para verificar no banco e login usuário padrão
-        if(email.equals("admin") && password.equals("admin")) {
+        User u = UserDAO.getUser(email);
+       
+        if(u.getPassword().equals(password)) {
             System.out.println("Sucesso na autenticação");
             
             SessionUtil.setParam("currentUser", userDto);
@@ -46,7 +49,9 @@ public class AuthenticationBean implements Serializable {
             userInfoBean.retriveUserInformation();
             
             return "/home.xhtml?faces-redirect=true";
-        } else {
+        } else if(email.equals("admin") && password.equals("admin")){
+            return "/adminpage.xhtml?faces-redirect=true";
+        }else {
             FacesUtil.addErrorMessage("Usuário nao encontrado");
             return null;
         }

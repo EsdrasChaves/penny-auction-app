@@ -5,7 +5,9 @@
  */
 package beans;
 
+import dao.UserDAO;
 import db.dto.UserRegisterDto;
+import entity.User;
 import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -24,11 +26,19 @@ public class RegisterBean implements Serializable {
     private String email;
     private String password;
     
-    public String register() {
+    public String register() throws ClassNotFoundException {
         
         UserRegisterDto userDto;
         userDto = new UserRegisterDto(name, email, password);
         
+        User u = new User();
+        u.setEmail(email);
+        u.setName(name);
+        u.setCredits(50);
+        u.setCash(0);
+        u.setPassword(password);
+        
+        UserDAO.saveUser(u);
         
         // TODO: Adicionar lógica do banco (register success)
         if(true) {

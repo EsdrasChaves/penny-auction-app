@@ -156,9 +156,10 @@ public class AuctionProduct {
         startTimer();
     }
     
-    private void finishAuction() {
+    public void finishAuction() {
         setHasFinished(true);
-        timer.cancel();
+        if(timer != null)
+            timer.cancel();
     }
     
     public void placeBid(String userName) {

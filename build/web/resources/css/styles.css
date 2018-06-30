@@ -1,0 +1,30 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26/06/2018, 15:40:16
+    Author     : esdra
+*/
+
+
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+#content {
+    margin-top: 50px;
+    min-width: 400px;
+    min-height: 1000px;
+}
+
+.imagens {
+    width: 50px;
+    height: 50px;
+}

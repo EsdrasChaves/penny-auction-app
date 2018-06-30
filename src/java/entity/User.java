@@ -14,6 +14,7 @@ public class User {
     private String email;
     private int credits;
     private double cash;
+    private String password;
 
     public User() {
     }
@@ -57,6 +58,12 @@ public class User {
         this.cash = cash;
     }
     
-    
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
 }

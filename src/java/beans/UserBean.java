@@ -5,10 +5,16 @@
  */
 package beans;
 
+import dao.UserDAO;
+import db.dto.UserAuthenticationDto;
 import entity.User;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import util.SessionUtil;
 
 /**
  *
@@ -25,16 +31,25 @@ public class UserBean {
     
     
     public void retriveUserInformation() {
-        
-        // TODO: recuperar informação do banco
-        
-        this.user = new User("Esdras", "esdraslchaves@gmail.com", 30, 45.0);
+        try {
+            
+            this.user = UserDAO.getUser(((UserAuthenticationDto)SessionUtil.getParam("currentUser")).getEmail());
+            System.out.println("TESTE USER" + this.user);
+        } catch (ParseException | ClassNotFoundException ex) {
+            Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void placeBid(int productId) {
-        //TODO: Checar se o usuário possui dinheiro e etc...
-        
-        auctionManagerBean.placeBid(user.getEmail(), productId);
+    public void placeBid(int productId) {        
+        if(user.getCredits() > 0){
+            auctionManagerBean.placeBid(user.getEmail(), productId);
+            user.setCredits(user.getCredits() - 1);
+            try {
+                UserDAO.updateUser(user);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(UserBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         
     }
 
