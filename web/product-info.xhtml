@@ -9,9 +9,9 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-
+    
     <h:head>
-
+        <link rel="StyleSheet" type="text/css" href="css/styles.css" ></link>
     </h:head>
 
 
@@ -24,6 +24,9 @@ and open the template in the editor.
                         <h:outputText value="#{product.description}" />    
                     </f:facet>
 
+                    <h:outputText value="Imagem:" />
+                    <h:graphicImage styleClass="imagens" value="#{product.imageLink}" />
+                    
                     <h:outputText value="Valor Inicial " />
                     <h:outputText value="#{product.initialValue}" />
 
@@ -34,11 +37,12 @@ and open the template in the editor.
                     <h:outputText value="#{product.userName}" rendered="#{product.hasStarted}" />
 
                     <h:outputText value="Data de início:" rendered="#{!product.hasStarted}"/>
-                    <h:outputText value="#{product.currentValue}" rendered="#{!product.hasStarted}" />
-
-
+                    <h:outputText value="#{product.initialDate}" rendered="#{!product.hasStarted}" />
+                 
                     <f:facet name="footer">
-                        <h:outputText id="timer-counter" value="#{auctionManagerBean.getProductTimer(product.id)}" />
+                        <h:outputText value="Arremate:" rendered="#{product.hasFinished and product.hasStarted}"/>
+                        <h:outputText value="#{product.userName}" rendered="#{product.hasFinished and product.hasStarted}"/>
+                        <h:outputText id="timer-counter" value="#{auctionManagerBean.getProductTimer(product.id)}" rendered="#{product.hasStarted and !product.hasFinished}" />
                         <p:commandButton value="Lance!" action="#{userBean.placeBid(product.id)}" rendered="#{sessionBean.logged and (!product.hasFinished and product.hasStarted)}" />      
                     </f:facet>     
                     

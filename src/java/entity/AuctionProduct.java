@@ -25,13 +25,14 @@ public class AuctionProduct {
     private boolean hasFinished;
     private int expirationTime;
     private Timer timer;
+    private String imageLink;
     
     private static final int DEFAULT_TIMER = 40;
     
     public AuctionProduct() {
     }
 
-    public AuctionProduct(int id, String name, String description, int initialValue, int currentValue, String userName, String initialDate, String productImage, boolean hasStarted, boolean hasFinished) {
+    public AuctionProduct(int id, String name, String description, int initialValue, int currentValue, String userName, String initialDate, String productImage, boolean hasStarted, boolean hasFinished, String imageLink) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,6 +43,7 @@ public class AuctionProduct {
         this.productImage = productImage;
         this.hasStarted = hasStarted;
         this.hasFinished = hasFinished;
+        this.imageLink = imageLink;
     }
 
     public int getId() {
@@ -107,6 +109,14 @@ public class AuctionProduct {
     public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
+    
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
 
     public boolean isHasStarted() {
         return hasStarted;
@@ -146,9 +156,10 @@ public class AuctionProduct {
         startTimer();
     }
     
-    private void finishAuction() {
+    public void finishAuction() {
         setHasFinished(true);
-        timer.cancel();
+        if(timer != null)
+            timer.cancel();
     }
     
     public void placeBid(String userName) {
@@ -171,6 +182,7 @@ public class AuctionProduct {
     }
     
     class CounterTimer extends TimerTask {
+
         @Override
         public void run() {
             int currentTime = getExpirationTime();
@@ -180,6 +192,7 @@ public class AuctionProduct {
             if(currentTime == 0)
                 finishAuction();
         }
+        
     }
     
 }
