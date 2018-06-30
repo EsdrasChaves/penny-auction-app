@@ -32,7 +32,7 @@ public class AuctionProduct {
     public AuctionProduct() {
     }
 
-    public AuctionProduct(int id, String name, String description, int initialValue, int currentValue, String userName, String initialDate, String productImage, boolean hasStarted, boolean hasFinished, String imageLink) {
+    public AuctionProduct(int id, String name, String description, int initialValue, int currentValue, String userName, String initialDate, String productImage, boolean hasStarted, boolean hasFinished) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -43,7 +43,6 @@ public class AuctionProduct {
         this.productImage = productImage;
         this.hasStarted = hasStarted;
         this.hasFinished = hasFinished;
-        this.imageLink = imageLink;
     }
 
     public int getId() {

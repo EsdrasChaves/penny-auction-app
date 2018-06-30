@@ -118,7 +118,8 @@ public class UserDAO {
                 
                 list.add(u);
             }
-            return list.get(0);
+            if(!list.isEmpty())
+                return list.get(0);
         }catch(SQLException ex){
             ex.printStackTrace();
         }

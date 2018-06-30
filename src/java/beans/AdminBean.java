@@ -5,8 +5,12 @@
  */
 package beans;
 
+import dao.AuctionProductDAO;
 import db.dto.ProductRegisterDto;
+import entity.AuctionProduct;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -36,9 +40,13 @@ public class AdminBean implements Serializable {
         ProductRegisterDto productDto;
         productDto = new ProductRegisterDto(productName, productId, productDescription, productInitialValue, productInitialDate, productImage);
         
-        
-        
-        // TODO: Adicionar lógica do banco (register success)
+        AuctionProduct ap = new AuctionProduct(productId,productName,productDescription, productInitialValue, productInitialValue, "", productInitialDate, productImage, false, false);
+
+        try {
+            AuctionProductDAO.saveProduct(ap);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AdminBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(true) {
             System.out.println("Registro efetuado com sucesso!");
             auctionManagerBean.loadProducts();

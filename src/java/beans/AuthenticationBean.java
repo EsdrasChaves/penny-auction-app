@@ -41,7 +41,9 @@ public class AuthenticationBean implements Serializable {
         
         User u = UserDAO.getUser(email);
        
-        if(u.getPassword().equals(password)) {
+        if(email.equals("admin") && password.equals("admin")){
+            return "/adminpage.xhtml";
+        }else if(u.getPassword().equals(password)) {
             System.out.println("Sucesso na autenticação");
             
             SessionUtil.setParam("currentUser", userDto);
@@ -49,8 +51,6 @@ public class AuthenticationBean implements Serializable {
             userInfoBean.retriveUserInformation();
             
             return "/home.xhtml?faces-redirect=true";
-        } else if(email.equals("admin") && password.equals("admin")){
-            return "/adminpage.xhtml?faces-redirect=true";
         }else {
             FacesUtil.addErrorMessage("Usuário nao encontrado");
             return null;

@@ -15,7 +15,7 @@ import java.util.List;
  * @author aline
  */
 public class AuctionProductDAO {
-    public void saveProduct(AuctionProduct ap) throws ClassNotFoundException{
+    public static void saveProduct(AuctionProduct ap) throws ClassNotFoundException{
       Class.forName("org.apache.derby.jdbc.ClientDriver");
         try{
             Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/leilao; create=true;user=root;password=root");

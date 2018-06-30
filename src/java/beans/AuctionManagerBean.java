@@ -126,10 +126,9 @@ public class AuctionManagerBean {
         }
     }
     
-    private void loadProducts() {
+    void loadProducts() {
         this.products.clear();
 
-       
         try {
             this.products = AuctionProductDAO.getProducts();
 
