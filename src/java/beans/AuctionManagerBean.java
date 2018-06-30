@@ -5,9 +5,13 @@
  */
 package beans;
 
+import dao.AuctionProductDAO;
 import entity.AuctionProduct;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -70,14 +74,20 @@ public class AuctionManagerBean {
     private void loadProducts() {
         this.products.clear();
         
-        // TODO: Adicionar busca no banco
-        
-        this.products.add(new AuctionProduct(0, "Iphone X", "Novo IPhone X", 0, 0, "", "30-05-2018", "", true, true));
-        this.products.add(new AuctionProduct(1, "PowerBank", "3.000 mAh", 0, 0, "", "30-05-2019", "", false, false));
-        this.products.add(new AuctionProduct(2, "NotebookAsus", "Notebook Gamer", 0, 0, "", "10-10-2010", "", true, false));
-        this.products.add(new AuctionProduct(3, "Caloi 10", "Bicicleta Speed", 50, 0, "", "30-05-2018", "", false, false));
-        this.products.add(new AuctionProduct(4, "Les Paul", "Guitarra", 0, 0, "", "13-10-2015", "", true, true));
-        this.products.add(new AuctionProduct(5, "Conjunto Panela", "Panelas Inox", 0, 0, "", "30-05-2018", "", false, false));
+        try {
+            this.products = AuctionProductDAO.getProducts();
+            
+//        this.products.add(new AuctionProduct(0, "Iphone X", "Novo IPhone X", 0, 0, "", "30-05-2018", "", true, true));
+//        this.products.add(new AuctionProduct(1, "PowerBank", "3.000 mAh", 0, 0, "", "30-05-2019", "", false, false));
+//        this.products.add(new AuctionProduct(2, "NotebookAsus", "Notebook Gamer", 0, 0, "", "10-10-2010", "", true, false));
+//        this.products.add(new AuctionProduct(3, "Caloi 10", "Bicicleta Speed", 50, 0, "", "30-05-2018", "", false, false));
+//        this.products.add(new AuctionProduct(4, "Les Paul", "Guitarra", 0, 0, "", "13-10-2015", "", true, true));
+//        this.products.add(new AuctionProduct(5, "Conjunto Panela", "Panelas Inox", 0, 0, "", "30-05-2018", "", false, false));
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AuctionManagerBean.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AuctionManagerBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
