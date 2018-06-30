@@ -76,27 +76,27 @@ public class AuctionProductDAO {
                 }
                 
                 if(!(rs.getString("DESCRIPTION").equals(""))){
-                    ap.setName(rs.getString("DESCRIPTION"));
+                    ap.setDescription(rs.getString("DESCRIPTION"));
                 }
                 
                 if(!(rs.getString("INITIAL_VALUE")).equals("")){
-                    ap.setId(Integer.parseInt(rs.getString("INITIAL_VALUE")));
+                    ap.setInitialValue(Integer.parseInt(rs.getString("INITIAL_VALUE")));
                 }
                 
                 if(!(rs.getString("CURRENT_VALUE")).equals("")){
-                    ap.setId(Integer.parseInt(rs.getString("CURRENT_VALUE")));
+                    ap.setCurrentValue(Integer.parseInt(rs.getString("CURRENT_VALUE")));
                 }
                 
                 if(!(rs.getString("USER_NAME").equals(""))){
-                    ap.setName(rs.getString("USER_NAME"));
+                    ap.setUserName(rs.getString("USER_NAME"));
                 }
                 
                 if(!(rs.getString("INITIAL_DATE").equals(""))){
-                    ap.setName(rs.getString("INITIAL_DATE"));
+                    ap.setInitialDate(rs.getString("INITIAL_DATE"));
                 }
                 
                 if(!(rs.getString("PRODUCT_IMAGE").equals(""))){
-                    ap.setName(rs.getString("PRODUCT_IMAGE"));
+                    ap.setProductImage(rs.getString("PRODUCT_IMAGE"));
                 }
                 
                 if(!(rs.getString("HAS_STARTED")).equals("")){
@@ -105,7 +105,7 @@ public class AuctionProductDAO {
                 if(!(rs.getString("HAS_FINISHED")).equals("")){
                     ap.setHasFinished(Boolean.parseBoolean(rs.getString("HAS_FINISHED")));
                 }
-                if(!(rs.getString("EXPIRATION_TIME")).equals("")){
+                if(rs.getString("EXPIRATION_TIME") != null && !(rs.getString("EXPIRATION_TIME")).equals("")){
                     ap.setExpirationTime(Integer.parseInt(rs.getString("EXPIRATION_TIME")));
                 }
                 
@@ -141,27 +141,27 @@ public class AuctionProductDAO {
                 }
                 
                 if(!(rs.getString("DESCRIPTION").equals(""))){
-                    ap.setName(rs.getString("DESCRIPTION"));
+                    ap.setDescription(rs.getString("DESCRIPTION"));
                 }
                 
                 if(!(rs.getString("INITIAL_VALUE")).equals("")){
-                    ap.setId(Integer.parseInt(rs.getString("INITIAL_VALUE")));
+                    ap.setInitialValue(Integer.parseInt(rs.getString("INITIAL_VALUE")));
                 }
                 
                 if(!(rs.getString("CURRENT_VALUE")).equals("")){
-                    ap.setId(Integer.parseInt(rs.getString("CURRENT_VALUE")));
+                    ap.setCurrentValue(Integer.parseInt(rs.getString("CURRENT_VALUE")));
                 }
                 
                 if(!(rs.getString("USER_NAME").equals(""))){
-                    ap.setName(rs.getString("USER_NAME"));
+                    ap.setUserName(rs.getString("USER_NAME"));
                 }
                 
                 if(!(rs.getString("INITIAL_DATE").equals(""))){
-                    ap.setName(rs.getString("INITIAL_DATE"));
+                    ap.setInitialDate(rs.getString("INITIAL_DATE"));
                 }
                 
                 if(!(rs.getString("PRODUCT_IMAGE").equals(""))){
-                    ap.setName(rs.getString("PRODUCT_IMAGE"));
+                    ap.setProductImage(rs.getString("PRODUCT_IMAGE"));
                 }
                 
                 if(!(rs.getString("HAS_STARTED")).equals("")){
@@ -170,7 +170,7 @@ public class AuctionProductDAO {
                 if(!(rs.getString("HAS_FINISHED")).equals("")){
                     ap.setHasFinished(Boolean.parseBoolean(rs.getString("HAS_FINISHED")));
                 }
-                if(!(rs.getString("EXPIRATION_TIME")).equals("")){
+                if(rs.getString("EXPIRATION_TIME") != null && !(rs.getString("EXPIRATION_TIME")).equals("")){
                     ap.setExpirationTime(Integer.parseInt(rs.getString("EXPIRATION_TIME")));
                 }
                 
