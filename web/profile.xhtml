@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+     
+     
+    <h:head>        
+        <link rel="stylesheet" type="text/css" href="/resources/css/styles.css" />
+    </h:head>
+ 
+    <h:body>
+        <h:form>
+            <p:tabMenu activeIndex="#{param.i}">
+                <p:menuitem value="Início" outcome="home.xhtml">
+                    <f:param name="i" value="0" />
+                </p:menuitem>
+                    
+                <p:menuitem value="Minha Página" outcome="profile.xhtml" rendered="#{sessionBean.logged == true}">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                
+                <p:menuitem value="Sair" action="#{authenticationBean.logout}" rendered="#{sessionBean.logged == true}">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+                
+                <p:menuitem value="Entrar" outcome="login.xhtml" rendered="#{sessionBean.logged == false}">
+                    <f:param name="i" value="3" />
+                </p:menuitem>
+            </p:tabMenu>
+        </h:form>
+        
+        <p:layout id="content">
+            <p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">
+                West
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                Center
+            </p:layoutUnit>
+        </p:layout>
+        
+    </h:body>
+</html>
