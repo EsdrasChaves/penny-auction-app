@@ -126,6 +126,10 @@ public class AuctionManagerBean {
         }
     }
     
+    void addProduct(AuctionProduct product) {
+        this.products.add(product);
+    }
+    
     void loadProducts() {
         this.products.clear();
 

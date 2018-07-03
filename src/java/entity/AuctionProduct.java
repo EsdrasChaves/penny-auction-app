@@ -5,8 +5,11 @@
  */
 package entity;
 
+import dao.AuctionProductDAO;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,11 +26,12 @@ public class AuctionProduct {
     private String productImage;
     private boolean hasStarted;
     private boolean hasFinished;
+    private boolean hasPaid;
     private int expirationTime;
     private Timer timer;
     private String imageLink;
     
-    private static final int DEFAULT_TIMER = 40;
+    private static final int DEFAULT_TIMER = 30;
     
     public AuctionProduct() {
     }
@@ -43,6 +47,7 @@ public class AuctionProduct {
         this.productImage = productImage;
         this.hasStarted = hasStarted;
         this.hasFinished = hasFinished;
+        this.hasPaid = false;
     }
 
     public int getId() {
@@ -78,7 +83,7 @@ public class AuctionProduct {
     }
 
     public int getCurrentValue() {
-        return initialValue + currentValue;
+        return currentValue;
     }
 
     public void setCurrentValue(int currentValue) {
@@ -86,6 +91,8 @@ public class AuctionProduct {
     }
 
     public String getUserName() {
+        if(this.userName == null)
+            return "Ninguém deu um lance";
         return userName;
     }
 
@@ -133,6 +140,16 @@ public class AuctionProduct {
         this.hasFinished = hasFinished;
     }
 
+    public boolean isHasPaid() {
+        return hasPaid;
+    }
+
+    public void setHasPaid(boolean hasPaid) {
+        this.hasPaid = hasPaid;
+    }
+    
+    
+
     public int getExpirationTime() {
         return expirationTime;
     }
@@ -157,8 +174,15 @@ public class AuctionProduct {
     
     public void finishAuction() {
         setHasFinished(true);
-        if(timer != null)
+        if(timer != null) {
             timer.cancel();
+            try {
+                AuctionProductDAO.updateProduct(this);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AuctionProduct.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+            
     }
     
     public void placeBid(String userName) {

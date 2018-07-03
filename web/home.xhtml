@@ -18,7 +18,7 @@
                     <f:param name="i" value="0" />
                 </p:menuitem>
                     
-                <p:menuitem value="Minha Página" outcome="profile.xhtml" rendered="#{sessionBean.logged == true}">
+                <p:menuitem value="Minha Página" action="#{userBean.getUserProducts}" rendered="#{sessionBean.logged == true}">
                     <f:param name="i" value="1" />
                 </p:menuitem>
                 
@@ -31,14 +31,15 @@
                 </p:menuitem>
             </p:tabMenu>
         </h:form>
-        
-            <div class="ui-g">
+            <div class="ui-g" id="productsList">
                <ui:repeat var="product" value="#{auctionManagerBean.products}">
                     <ui:include src="product-info.xhtml">
                         <ui:param name="product" value="#{product}" />
                     </ui:include>
                 </ui:repeat>
             </div>
-        
+            
+      
+             
     </h:body>
 </html>

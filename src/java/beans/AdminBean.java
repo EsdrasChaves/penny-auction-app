@@ -49,7 +49,7 @@ public class AdminBean implements Serializable {
         }
         if(true) {
             System.out.println("Registro efetuado com sucesso!");
-            auctionManagerBean.loadProducts();
+            auctionManagerBean.addProduct(ap);
             return "/adminpage.xhtml?faces-redirect=true";
         } else {
             FacesUtil.addErrorMessage("Já existe um produto para esse ID");

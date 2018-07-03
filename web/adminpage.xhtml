@@ -17,6 +17,20 @@ and open the template in the editor.
 <h:body>
     
     <div id="container">
+        
+        <h:form>
+            <p:tabMenu activeIndex="#{param.i}">
+                
+                    
+                <p:menuitem value="Admin Page" action="#{auctionManagerBean.getUserProducts}" outcome="userpage.xhtml">
+                    <f:param name="i" value="1" />
+                </p:menuitem>
+                
+                <p:menuitem value="Sair" action="#{authenticationBean.logout}">
+                    <f:param name="i" value="2" />
+                </p:menuitem>
+            </p:tabMenu>
+        </h:form>
             <f:view>
                 <h:form prependId="false">
                     <p:panelGrid columns="2" styleClass="ui-fluid center ui-noborder">
@@ -54,4 +68,3 @@ and open the template in the editor.
         </div>
 </h:body>
 </html>
-
